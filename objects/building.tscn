@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://uowi3g6syltd"]
+
+[ext_resource type="Script" uid="uid://cl3vywffmdhe7" path="res://objects/building.gd" id="1_gfisn"]
+[ext_resource type="Texture2D" uid="uid://6o10rkql523o" path="res://assets/test_building-Sheet.png" id="2_515t0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfisn"]
+size = Vector2(514, 431)
+
+[node name="building" type="Node2D" unique_id=978927594]
+script = ExtResource("1_gfisn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=47930915]
+texture = ExtResource("2_515t0")
+hframes = 4
+
+[node name="Area2D" type="Area2D" parent="." unique_id=517517223]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1305664626]
+position = Vector2(7, -23.5)
+shape = SubResource("RectangleShape2D_gfisn")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
