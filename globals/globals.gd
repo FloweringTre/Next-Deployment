@@ -2,12 +2,6 @@ extends Node
 
 var day_count = 1
 
-var ResourceInventory : Dictionary = {
-	"stone" = 100,
-	"wood" = 100,
-	"labor" = 100
-}
-
 func _ready() -> void:
 	Globals.object_interaction.connect(_on_global_interaction)
 
@@ -33,20 +27,20 @@ func _on_global_interaction(reciever, sender, message):
 			var can_go_thru = false
 			match random_upgrade:
 				1:
-					if budget_check(ResourceInventory["wood"], 25) && budget_check(ResourceInventory["labor"], 25):
-						ResourceInventory.set("wood", (ResourceInventory["wood"]-25))
-						ResourceInventory.set("labor", (ResourceInventory["labor"]-25))
+					if budget_check(BuySheet.ResourceInventory["wood"], 25) && budget_check(BuySheet.ResourceInventory["labor"], 25):
+						BuySheet.ResourceInventory.set("wood", (BuySheet.ResourceInventory["wood"]-25))
+						BuySheet.ResourceInventory.set("labor", (BuySheet.ResourceInventory["labor"]-25))
 						can_go_thru = true
 				2:
-					if budget_check(ResourceInventory["stone"], 15) && budget_check(ResourceInventory["wood"], 15) && budget_check(ResourceInventory["labor"], 25):
-						ResourceInventory.set("wood", (ResourceInventory["wood"]-15))
-						ResourceInventory.set("stone", (ResourceInventory["stone"]-15))
-						ResourceInventory.set("labor", (ResourceInventory["labor"]-25))
+					if budget_check(BuySheet.ResourceInventory["stone"], 15) && budget_check(BuySheet.ResourceInventory["wood"], 15) && budget_check(BuySheet.ResourceInventory["labor"], 25):
+						BuySheet.ResourceInventory.set("wood", (BuySheet.ResourceInventory["wood"]-15))
+						BuySheet.ResourceInventory.set("stone", (BuySheet.ResourceInventory["stone"]-15))
+						BuySheet.ResourceInventory.set("labor", (BuySheet.ResourceInventory["labor"]-25))
 						can_go_thru = true
 				3:
-					if budget_check(ResourceInventory["stone"], 25) && budget_check(ResourceInventory["labor"], 25):
-						ResourceInventory.set("stone", (ResourceInventory["stone"]-25))
-						ResourceInventory.set("labor", (ResourceInventory["labor"]-25))
+					if budget_check(BuySheet.ResourceInventory["stone"], 25) && budget_check(BuySheet.ResourceInventory["labor"], 25):
+						BuySheet.ResourceInventory.set("stone", (BuySheet.ResourceInventory["stone"]-25))
+						BuySheet.ResourceInventory.set("labor", (BuySheet.ResourceInventory["labor"]-25))
 						can_go_thru = true
 			
 			if can_go_thru:
@@ -56,14 +50,26 @@ func _on_global_interaction(reciever, sender, message):
 		
 		"global_new_day":
 			print("globalnewdayheard")
-			ResourceInventory.set("wood", (ResourceInventory["wood"]+25))
-			ResourceInventory.set("stone", (ResourceInventory["stone"]+25))
-			ResourceInventory.set("labor", 100)
+			BuySheet.ResourceInventory.set("wood", (BuySheet.ResourceInventory["wood"]+25))
+			BuySheet.ResourceInventory.set("stone", (BuySheet.ResourceInventory["stone"]+25))
+			BuySheet.ResourceInventory.set("labor", 100)
 			day_count += 1
 			interact_with("GLOBAL_ALERT", "global", "new_day")
 
 func budget_check(value_to_check, price):
 	if (value_to_check - price) < 0:
+		#print("budget check false")
 		return false
 	else:
+		#print("budget check true")
 		return true
+
+
+func purchase(building_array):
+	if building_array[0] == "rubble":
+		building_array[1] = building_array[1] * -1
+		building_array[1] = building_array[2] * -1
+	
+	BuySheet.ResourceInventory["wood"] -= building_array[1]
+	BuySheet.ResourceInventory["stone"] -= building_array[2]
+	BuySheet.ResourceInventory["labor"] -= building_array[3]
