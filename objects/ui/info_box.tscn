@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://coshjv25d5pl"]
+
+[ext_resource type="Script" uid="uid://bdu85viu6081o" path="res://objects/ui/info_box.gd" id="1_3wg07"]
+
+[node name="InfoBox" type="VBoxContainer" unique_id=476704406]
+custom_minimum_size = Vector2(175, 0)
+script = ExtResource("1_3wg07")
+plot_spot = "shelter_2"
+building = "rubble"
+
+[node name="name" type="Label" parent="." unique_id=1574077617]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+text = "name of the building"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1557742340]
+custom_minimum_size = Vector2(165, 45)
+layout_mode = 2
+
+[node name="about" type="Label" parent="ScrollContainer" unique_id=1769214596]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(165, 45)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "this is text about the building to be bought. it has smaller text."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="costs" type="Label" parent="." unique_id=490651113]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "cpsts:
+wood: 25
+stone: 0
+labor: 15"
+autowrap_mode = 2
+
+[node name="buy_button" type="Button" parent="." unique_id=137399740]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(165, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "build this"
+
+[connection signal="pressed" from="buy_button" to="." method="_on_buy_button_pressed"]
