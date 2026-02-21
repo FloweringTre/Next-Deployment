@@ -5,20 +5,22 @@ func _ready() -> void:
 	resource_update()
 
 func _on_global_interaction(reciever, sender, message):
-	if sender == "global":
-		resource_update()
-	if reciever == "GLOBAL_ALERT":
-		match message:
-			"Not Enough Resources":
-				%alert_label.text = "Not enough resources to build"
-				$Timer.start(3)
-			"new_day":
-				resource_update()
+	match reciever:
+		"GLOBAL_PURCHASE":
+			resource_update()
+		
+		"GLOBAL_ALERT":
+			match message:
+				"Not Enough Resources":
+					%alert_label.text = "Not enough resources to build"
+					$Timer.start(3)
+				"new_day":
+					resource_update()
 
 func resource_update() -> void:
-	%wood.text = str(Globals.ResourceInventory["wood"])
-	%stone.text = str(Globals.ResourceInventory["stone"])
-	%labor.text = str(Globals.ResourceInventory["labor"])
+	%wood.text = str(BuySheet.ResourceInventory["wood"])
+	%stone.text = str(BuySheet.ResourceInventory["stone"])
+	%labor.text = str(BuySheet.ResourceInventory["labor"])
 	%day.text = str(Globals.day_count)
 
 
