@@ -1,7 +1,8 @@
 extends Node2D
 
 var mouse_on : bool = false
-@export var myself = "building"
+@export var myself : String = "building"
+@export var plot_spot : String
 
 func _ready() -> void:
 	$Sprite2D.frame = 0
@@ -9,20 +10,27 @@ func _ready() -> void:
 	_on_area_2d_mouse_exited()
 
 func _on_global_interaction(reciever, sender, message):
-	if reciever == myself:
-		$Sprite2D.frame = message
-	if reciever == "GLOBAL_ALERT":
-		match message:
-			"Not Enough Resources":
-				$Area2D/CollisionShape2D.disabled = true
-			"new_day":
-				$Area2D/CollisionShape2D.disabled = false
+	match reciever:
+		myself:
+			$Sprite2D.frame = message
+		
+		"GLOBAL_ALERT":
+			match message:
+				"Not Enough Resources":
+					$Area2D/CollisionShape2D.disabled = true
+				"new_day":
+					$Area2D/CollisionShape2D.disabled = false
+		
+		"GLOBAL_PURCHASE":
+			if plot_spot == message:
+				$Sprite2D.frame = BuySheet.ShelterDwellings[BuySheet.BuildingInventory[plot_spot]]["image"]
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_on:
+		pass
 		#print(mouse_on, " - CLICK!")
-		Globals.interact_with("global_building", myself, $Sprite2D.frame)
+		#Globals.interact_with("global_building", myself, $Sprite2D.frame)
 
 func _on_area_2d_mouse_entered() -> void:
 	mouse_on = true
