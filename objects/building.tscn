@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cl3vywffmdhe7" path="res://objects/building.gd" id="1_gfisn"]
 [ext_resource type="Texture2D" uid="uid://6o10rkql523o" path="res://assets/test_building-Sheet.png" id="2_515t0"]
+[ext_resource type="Texture2D" uid="uid://bdvw6rdyp4io3" path="res://assets/cone.png" id="3_515t0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfisn"]
-size = Vector2(514, 431)
+size = Vector2(514, 268.5)
 
 [node name="building" type="Node2D" unique_id=978927594]
 script = ExtResource("1_gfisn")
@@ -12,11 +13,17 @@ script = ExtResource("1_gfisn")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=47930915]
 texture = ExtResource("2_515t0")
 hframes = 4
+frame = 2
+
+[node name="cone" type="Sprite2D" parent="." unique_id=1660744722]
+visible = false
+position = Vector2(62, 39)
+texture = ExtResource("3_515t0")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=517517223]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1305664626]
-position = Vector2(7, -23.5)
+position = Vector2(4, 123.25)
 shape = SubResource("RectangleShape2D_gfisn")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
