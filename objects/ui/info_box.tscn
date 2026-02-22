@@ -1,14 +1,49 @@
 [gd_scene format=3 uid="uid://coshjv25d5pl"]
 
 [ext_resource type="Script" uid="uid://bdu85viu6081o" path="res://objects/ui/info_box.gd" id="1_3wg07"]
+[ext_resource type="Texture2D" uid="uid://6o10rkql523o" path="res://assets/test_building-Sheet.png" id="2_d6h8t"]
 
-[node name="InfoBox" type="VBoxContainer" unique_id=476704406]
-custom_minimum_size = Vector2(175, 0)
+[sub_resource type="Gradient" id="Gradient_d6h8t"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0.43137255, 0.18039216, 0.46666667)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_56ckc"]
+gradient = SubResource("Gradient_d6h8t")
+width = 175
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xck8"]
+atlas = ExtResource("2_d6h8t")
+region = Rect2(512, 0, 512, 512)
+
+[node name="InfoBox" type="Control" unique_id=1663208002]
+custom_minimum_size = Vector2(185, 394)
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_3wg07")
-plot_spot = "shelter_2"
-building = "rubble"
 
-[node name="name" type="Label" parent="." unique_id=1574077617]
+[node name="bg_color" type="TextureRect" parent="." unique_id=837815544]
+custom_minimum_size = Vector2(185, 394)
+layout_mode = 0
+offset_right = 185.0
+offset_bottom = 394.0
+texture = SubResource("GradientTexture1D_56ckc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1138059711]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 180.0
+offset_bottom = 381.0
+
+[node name="image" type="TextureRect" parent="VBoxContainer" unique_id=716746024]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = SubResource("AtlasTexture_2xck8")
+expand_mode = 5
+
+[node name="name" type="Label" parent="VBoxContainer" unique_id=1574077617]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(165, 0)
 layout_mode = 2
@@ -16,11 +51,11 @@ text = "name of the building"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1557742340]
-custom_minimum_size = Vector2(165, 45)
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1557742340]
+custom_minimum_size = Vector2(165, 50)
 layout_mode = 2
 
-[node name="about" type="Label" parent="ScrollContainer" unique_id=1769214596]
+[node name="about" type="Label" parent="VBoxContainer/ScrollContainer" unique_id=1769214596]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(165, 45)
 layout_mode = 2
@@ -30,7 +65,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="costs" type="Label" parent="." unique_id=490651113]
+[node name="costs" type="Label" parent="VBoxContainer" unique_id=490651113]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
@@ -41,11 +76,26 @@ stone: 0
 labor: 15"
 autowrap_mode = 2
 
-[node name="buy_button" type="Button" parent="." unique_id=137399740]
+[node name="buy_button" type="Button" parent="VBoxContainer" unique_id=137399740]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(165, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "build this"
 
-[connection signal="pressed" from="buy_button" to="." method="_on_buy_button_pressed"]
+[node name="queued_label" type="Label" parent="." unique_id=1854638837]
+visible = false
+layout_mode = 0
+offset_left = 10.999999
+offset_top = 109.0
+offset_right = 184.0
+offset_bottom = 132.0
+rotation = -0.41753107
+theme_override_colors/font_color = Color(0.7058824, 0.72156864, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.14509805, 0.14509805, 0.14509805, 0.5529412)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 3
+text = "BUILDING OVERNIGHT"
+
+[connection signal="pressed" from="VBoxContainer/buy_button" to="." method="_on_buy_button_pressed"]
