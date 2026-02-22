@@ -18,42 +18,19 @@ func interact_with(reciever : String, sender : String, message = null ):
 
 func _on_global_interaction(reciever, sender, message):
 	match reciever:
-		"global_building":
-			var random_upgrade = randi_range(1,3)
-			while random_upgrade == message:
-				random_upgrade = randi_range(1,3)
-				print("rerolling...")
-			
-			var can_go_thru = false
-			match random_upgrade:
-				1:
-					if budget_check(BuySheet.ResourceInventory["wood"], 25) && budget_check(BuySheet.ResourceInventory["labor"], 25):
-						BuySheet.ResourceInventory.set("wood", (BuySheet.ResourceInventory["wood"]-25))
-						BuySheet.ResourceInventory.set("labor", (BuySheet.ResourceInventory["labor"]-25))
-						can_go_thru = true
-				2:
-					if budget_check(BuySheet.ResourceInventory["stone"], 15) && budget_check(BuySheet.ResourceInventory["wood"], 15) && budget_check(BuySheet.ResourceInventory["labor"], 25):
-						BuySheet.ResourceInventory.set("wood", (BuySheet.ResourceInventory["wood"]-15))
-						BuySheet.ResourceInventory.set("stone", (BuySheet.ResourceInventory["stone"]-15))
-						BuySheet.ResourceInventory.set("labor", (BuySheet.ResourceInventory["labor"]-25))
-						can_go_thru = true
-				3:
-					if budget_check(BuySheet.ResourceInventory["stone"], 25) && budget_check(BuySheet.ResourceInventory["labor"], 25):
-						BuySheet.ResourceInventory.set("stone", (BuySheet.ResourceInventory["stone"]-25))
-						BuySheet.ResourceInventory.set("labor", (BuySheet.ResourceInventory["labor"]-25))
-						can_go_thru = true
-			
-			if can_go_thru:
-				interact_with(sender, "global", random_upgrade)
-			else:
-				interact_with("GLOBAL_ALERT", "global", "Not Enough Resources")
-		
 		"global_new_day":
-			print("globalnewdayheard")
+			#print("globalnewdayheard")
 			BuySheet.ResourceInventory.set("wood", (BuySheet.ResourceInventory["wood"]+25))
 			BuySheet.ResourceInventory.set("stone", (BuySheet.ResourceInventory["stone"]+25))
 			BuySheet.ResourceInventory.set("labor", 100)
 			day_count += 1
+			
+			for plot in BuySheet.BuildingInventory:
+				BuySheet.BuildingInventory[plot].set("worked_today", false)
+				if BuySheet.BuildingInventory[plot]["queued"] != "":
+					BuySheet.BuildingInventory[plot].set("built", BuySheet.BuildingInventory[plot]["queued"])
+				BuySheet.BuildingInventory[plot].set("queued", "")
+			
 			interact_with("GLOBAL_ALERT", "global", "new_day")
 
 func budget_check(value_to_check, price):
@@ -68,7 +45,7 @@ func budget_check(value_to_check, price):
 func purchase(building_array):
 	if building_array[0] == "rubble":
 		building_array[1] = building_array[1] * -1
-		building_array[1] = building_array[2] * -1
+		building_array[2] = building_array[2] * -1
 	
 	BuySheet.ResourceInventory["wood"] -= building_array[1]
 	BuySheet.ResourceInventory["stone"] -= building_array[2]
