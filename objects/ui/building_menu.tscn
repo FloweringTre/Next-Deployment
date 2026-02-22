@@ -1,31 +1,14 @@
 [gd_scene format=3 uid="uid://be00j8kley42i"]
 
-[ext_resource type="Texture2D" uid="uid://6o10rkql523o" path="res://assets/test_building-Sheet.png" id="1_248l0"]
-[ext_resource type="PackedScene" uid="uid://coshjv25d5pl" path="res://objects/ui/info_box.tscn" id="2_61gds"]
+[ext_resource type="Script" uid="uid://bnide3da7pvhd" path="res://objects/ui/building_menu.gd" id="1_248l0"]
 
 [sub_resource type="Gradient" id="Gradient_248l0"]
 offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0.43137255, 0.18039216, 0.46666667)
+colors = PackedColorArray(0.47600818, 0.4661615, 0.4807951, 0.46666667)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_61gds"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_auhnm"]
 gradient = SubResource("Gradient_248l0")
 width = 175
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a4cow"]
-atlas = ExtResource("1_248l0")
-region = Rect2(0, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_248l0"]
-atlas = ExtResource("1_248l0")
-region = Rect2(512, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_61gds"]
-atlas = ExtResource("1_248l0")
-region = Rect2(1024, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_06bb7"]
-atlas = ExtResource("1_248l0")
-region = Rect2(1536, 0, 512, 512)
 
 [node name="BuildingMenu" type="Control" unique_id=2115674862]
 layout_mode = 3
@@ -34,119 +17,42 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_248l0")
+plot_spot = "shelter_2"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1571406248]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Container" type="Control" parent="HBoxContainer" unique_id=1678894826]
-custom_minimum_size = Vector2(185, 394)
-layout_mode = 2
-
-[node name="bg_color" type="TextureRect" parent="HBoxContainer/Container" unique_id=2056626727]
-custom_minimum_size = Vector2(185, 394)
+[node name="bg_color" type="TextureRect" parent="." unique_id=701569392]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(185, 460)
 layout_mode = 0
 offset_right = 185.0
-offset_bottom = 380.0
-texture = SubResource("GradientTexture1D_61gds")
+offset_bottom = 394.0
+texture = SubResource("GradientTexture1D_auhnm")
 
-[node name="image1" type="TextureRect" parent="HBoxContainer/Container" unique_id=1325596048]
-custom_minimum_size = Vector2(175, 0)
+[node name="MenuBox" type="VBoxContainer" parent="." unique_id=1843127713]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 5.0
-offset_right = 180.0
-offset_bottom = 175.0
-texture = SubResource("AtlasTexture_a4cow")
-expand_mode = 5
+offset_top = 5.0
+offset_right = 94.0
+offset_bottom = 67.0
 
-[node name="InfoBox1" parent="HBoxContainer/Container" unique_id=476704406 instance=ExtResource("2_61gds")]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 175.0
-offset_right = 180.0
-offset_bottom = 373.0
-
-[node name="Container2" type="Control" parent="HBoxContainer" unique_id=1524689299]
-custom_minimum_size = Vector2(185, 394)
+[node name="Label" type="Label" parent="MenuBox" unique_id=1648398520]
+unique_name_in_owner = true
 layout_mode = 2
+text = "Build menu"
+horizontal_alignment = 1
 
-[node name="bg_color" type="TextureRect" parent="HBoxContainer/Container2" unique_id=598641688]
-custom_minimum_size = Vector2(185, 394)
-layout_mode = 0
-offset_right = 185.0
-offset_bottom = 380.0
-texture = SubResource("GradientTexture1D_61gds")
-
-[node name="image2" type="TextureRect" parent="HBoxContainer/Container2" unique_id=1924371902]
-custom_minimum_size = Vector2(175, 0)
-layout_mode = 0
-offset_left = 5.0
-offset_right = 180.0
-offset_bottom = 175.0
-texture = SubResource("AtlasTexture_248l0")
-expand_mode = 5
-
-[node name="InfoBox2" parent="HBoxContainer/Container2" unique_id=1251739897 instance=ExtResource("2_61gds")]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 175.0
-offset_right = 180.0
-offset_bottom = 373.0
-building = "log_house"
-
-[node name="Container3" type="Control" parent="HBoxContainer" unique_id=84622605]
-custom_minimum_size = Vector2(185, 394)
+[node name="CardBox" type="HBoxContainer" parent="MenuBox" unique_id=1571406248]
+unique_name_in_owner = true
 layout_mode = 2
+alignment = 1
 
-[node name="bg_color" type="TextureRect" parent="HBoxContainer/Container3" unique_id=56987988]
-custom_minimum_size = Vector2(185, 394)
-layout_mode = 0
-offset_right = 185.0
-offset_bottom = 380.0
-texture = SubResource("GradientTexture1D_61gds")
-
-[node name="image3" type="TextureRect" parent="HBoxContainer/Container3" unique_id=1084262155]
-custom_minimum_size = Vector2(175, 0)
-layout_mode = 0
-offset_left = 5.0
-offset_right = 180.0
-offset_bottom = 175.0
-texture = SubResource("AtlasTexture_61gds")
-expand_mode = 5
-
-[node name="InfoBox3" parent="HBoxContainer/Container3" unique_id=1429973309 instance=ExtResource("2_61gds")]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 175.0
-offset_right = 180.0
-offset_bottom = 373.0
-building = "adobe_house"
-
-[node name="Container4" type="Control" parent="HBoxContainer" unique_id=907799301]
-custom_minimum_size = Vector2(185, 394)
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuBox" unique_id=1052998840]
 layout_mode = 2
+alignment = 2
 
-[node name="bg_color" type="TextureRect" parent="HBoxContainer/Container4" unique_id=1033968178]
-custom_minimum_size = Vector2(185, 394)
-layout_mode = 0
-offset_right = 185.0
-offset_bottom = 380.0
-texture = SubResource("GradientTexture1D_61gds")
+[node name="Button" type="Button" parent="MenuBox/HBoxContainer" unique_id=2140384785]
+layout_mode = 2
+text = "close"
 
-[node name="image4" type="TextureRect" parent="HBoxContainer/Container4" unique_id=1104281898]
-custom_minimum_size = Vector2(175, 0)
-layout_mode = 0
-offset_left = 5.0
-offset_right = 180.0
-offset_bottom = 175.0
-texture = SubResource("AtlasTexture_06bb7")
-expand_mode = 5
-
-[node name="InfoBox4" parent="HBoxContainer/Container4" unique_id=901513331 instance=ExtResource("2_61gds")]
-layout_mode = 0
-offset_left = 5.0
-offset_top = 175.0
-offset_right = 180.0
-offset_bottom = 373.0
-building = "brick_house"
+[connection signal="pressed" from="MenuBox/HBoxContainer/Button" to="." method="_on_button_pressed"]
