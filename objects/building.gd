@@ -43,6 +43,10 @@ func _on_global_interaction(reciever, sender, message):
 					$Sprite2D.frame = reference_dictionary[BuySheet.BuildingInventory[plot_spot]["built"]]["image"][0]
 					$cone.visible = false
 					$Area2D/CollisionShape2D.disabled = false
+					
+					if BuySheet.BuildingInventory[plot_spot]["built"] == "well":
+						BuySheet.ResourceInventory["water"] += 50
+						Globals.interact_with("RESOURCE_UPDATE", plot_spot, "water_added_from_well")
 		
 		"GLOBAL_PURCHASE":
 			if plot_spot == message:
