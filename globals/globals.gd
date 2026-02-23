@@ -23,6 +23,8 @@ func _on_global_interaction(reciever, sender, message):
 			BuySheet.ResourceInventory.set("wood", (BuySheet.ResourceInventory["wood"]+25))
 			BuySheet.ResourceInventory.set("stone", (BuySheet.ResourceInventory["stone"]+25))
 			BuySheet.ResourceInventory.set("labor", 100)
+			BuySheet.ResourceInventory.set("water", (BuySheet.ResourceInventory["water"]-10))
+			BuySheet.ResourceInventory.set("food", (BuySheet.ResourceInventory["food"]-10))
 			day_count += 1
 			
 			for plot in BuySheet.BuildingInventory:
@@ -42,7 +44,7 @@ func budget_check(value_to_check, price):
 		return true
 
 
-func purchase(building_array):
+func building_purchase(building_array):
 	if building_array[0] == "rubble":
 		building_array[1] = building_array[1] * -1
 		building_array[2] = building_array[2] * -1
@@ -50,3 +52,7 @@ func purchase(building_array):
 	BuySheet.ResourceInventory["wood"] -= building_array[1]
 	BuySheet.ResourceInventory["stone"] -= building_array[2]
 	BuySheet.ResourceInventory["labor"] -= building_array[3]
+
+func farming_costs(farm_array):
+	BuySheet.ResourceInventory["water"] -= farm_array[0]
+	BuySheet.ResourceInventory["labor"] -= farm_array[1]
