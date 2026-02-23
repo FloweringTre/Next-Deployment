@@ -65,7 +65,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="costs" type="Label" parent="VBoxContainer" unique_id=490651113]
+[node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer" unique_id=456101737]
+custom_minimum_size = Vector2(140, 105)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="costs" type="Label" parent="VBoxContainer/ScrollContainer2" unique_id=490651113]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
