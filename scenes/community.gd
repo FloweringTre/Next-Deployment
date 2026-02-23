@@ -8,6 +8,8 @@ func _on_global_interaction(reciever, sender, message):
 	match reciever:
 		"GLOBAL_PURCHASE":
 			resource_update()
+		"RESOURCE_UPDATE":
+			resource_update()
 		
 		"GLOBAL_ALERT":
 			match message:
@@ -21,6 +23,8 @@ func resource_update() -> void:
 	%wood.text = str(BuySheet.ResourceInventory["wood"])
 	%stone.text = str(BuySheet.ResourceInventory["stone"])
 	%labor.text = str(BuySheet.ResourceInventory["labor"])
+	%water.text = str(BuySheet.ResourceInventory["water"])
+	%food.text = str(BuySheet.ResourceInventory["food"])
 	%day.text = str(Globals.day_count)
 
 
