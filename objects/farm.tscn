@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://b3fafbai22rpu"]
+
+[ext_resource type="Script" uid="uid://dpqfts2nmc7mv" path="res://objects/farm.gd" id="1_m5seo"]
+[ext_resource type="Texture2D" uid="uid://bj14g18oltglf" path="res://assets/test_farm-Sheet.png" id="2_rsdvv"]
+[ext_resource type="Texture2D" uid="uid://bdvw6rdyp4io3" path="res://assets/cone.png" id="3_yclc7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfisn"]
+size = Vector2(514, 268.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5seo"]
+atlas = ExtResource("2_rsdvv")
+region = Rect2(1536, 1024, 512, 512)
+
+[node name="farm" type="Node2D" unique_id=978927594]
+script = ExtResource("1_m5seo")
+plot_spot = "farm_1"
+field_level = "small_field"
+
+[node name="fieldsprite" type="Sprite2D" parent="." unique_id=47930915]
+texture = ExtResource("2_rsdvv")
+hframes = 4
+vframes = 3
+frame = 1
+
+[node name="crops" type="Node2D" parent="." unique_id=553150738]
+
+[node name="row_3" type="Sprite2D" parent="crops" unique_id=1462947272]
+unique_name_in_owner = true
+visible = false
+position = Vector2(5, -85)
+texture = ExtResource("2_rsdvv")
+hframes = 4
+vframes = 3
+frame = 4
+
+[node name="row_2" type="Sprite2D" parent="crops" unique_id=1784756791]
+unique_name_in_owner = true
+position = Vector2(-13, -39)
+texture = ExtResource("2_rsdvv")
+hframes = 4
+vframes = 3
+frame = 6
+
+[node name="row_1" type="Sprite2D" parent="crops" unique_id=905788635]
+unique_name_in_owner = true
+position = Vector2(-32, 3)
+texture = ExtResource("2_rsdvv")
+hframes = 4
+vframes = 3
+frame = 10
+
+[node name="cone" type="Sprite2D" parent="." unique_id=1660744722]
+visible = false
+position = Vector2(62, 39)
+texture = ExtResource("3_yclc7")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=517517223]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1305664626]
+position = Vector2(4, 123.25)
+shape = SubResource("RectangleShape2D_gfisn")
+
+[node name="harvestParticle" type="CPUParticles2D" parent="." unique_id=22089120]
+position = Vector2(-1, 62)
+emitting = false
+amount = 18
+texture = SubResource("AtlasTexture_m5seo")
+one_shot = true
+emission_shape = 3
+emission_rect_extents = Vector2(200, 30)
+gravity = Vector2(0, 100)
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+scale_amount_min = 0.25
+scale_amount_max = 0.5
+
+[node name="readyParticle" type="CPUParticles2D" parent="." unique_id=142031872]
+position = Vector2(7, 136)
+emitting = false
+amount = 15
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(200, 0)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 60.0
+angular_velocity_min = 90.0
+angular_velocity_max = 180.0
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+scale_amount_min = 5.0
+scale_amount_max = 15.0
+color = Color(0.75539696, 0.77961135, 0.65897495, 1)
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
