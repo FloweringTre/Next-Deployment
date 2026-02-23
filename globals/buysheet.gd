@@ -6,7 +6,9 @@ extends Node
 var ResourceInventory : Dictionary = {
 	"stone" = 100,
 	"wood" = 100,
-	"labor" = 100
+	"labor" = 100,
+	"water" = 100,
+	"food" = 100
 }
 
 var BuildingInventory : Dictionary = {
@@ -31,12 +33,30 @@ var BuildingInventory : Dictionary = {
 		"worked_today" = false,
 		"queued" = "",
 	},
+	"community_2" = {
+		"name" = "Community Plot 2",
+		"type" = "community",
+		"built" = "rubble",
+		"worked_today" = false,
+		"queued" = "",
+	},
 	"farm_1" = {
 		"name" = "Farm Field 1",
 		"type" = "farm",
 		"built" = "rubble",
 		"worked_today" = false,
 		"queued" = "",
+		"crop_planted" = "none", 
+		"crop_level" = 0,
+	},
+	"farm_2" = {
+		"name" = "Farm Field 2",
+		"type" = "farm",
+		"built" = "rubble",
+		"worked_today" = false,
+		"queued" = "",
+		"crop_planted" = "none", 
+		"crop_level" = 0,
 	},
 }
 
@@ -115,7 +135,16 @@ var CommunityGathering : Dictionary = {
 		"wood" = 15,
 		"stone" = 30,
 		"labor" = 25
-	}
+	},
+	"well" = {
+		"name" = "Water Well",
+		"about" = "Provides 50 water units per day.",
+		"source" = preload("res://assets/test_community-Sheet.png"),
+		"image" = [4, 0, 512, 512],
+		"wood" = 10,
+		"stone" = 50,
+		"labor" = 30
+	},
 }
 
 var FarmingFields : Dictionary = {
@@ -126,15 +155,73 @@ var FarmingFields : Dictionary = {
 		"image" = [0, 0, 512, 512],
 		"wood" = 0,
 		"stone" = 0,
-		"labor" = 15
+		"labor" = 15,
+		"water" = 0,
 	},
-	"field_open" = {
-		"name" = "Prepared Farm Field",
-		"about" = "Ready the field for crops",
+	"small_field" = {
+		"name" = "Small Field",
+		"about" = "Prepared land for a small amount of crops.",
 		"source" = preload("res://assets/test_farm-Sheet.png"),
 		"image" = [1, 0, 512, 512],
 		"wood" = 0,
 		"stone" = 0,
-		"labor" = 40
+		"labor" = 40,
+		"water" = 40,
 	},
+	"medium_field" = {
+		"name" = "Medium Field",
+		"about" = "Prepared land for a medium amount of crops.",
+		"source" = preload("res://assets/test_farm-Sheet.png"),
+		"image" = [2, 0, 512, 512],
+		"wood" = 0,
+		"stone" = 0,
+		"labor" = 60,
+		"water" = 60,
+	},
+	"large_field" = {
+		"name" = "Large Field",
+		"about" = "Prepared land for a large amount of crops.",
+		"source" = preload("res://assets/test_farm-Sheet.png"),
+		"image" = [3, 0, 512, 512],
+		"wood" = 0,
+		"stone" = 0,
+		"labor" = 80,
+		"water" = 80,
+	},
+}
+
+var CropList : Dictionary = {
+	"none" = {
+		"name" = "Open Field",
+		"image" = [1, 0, 512, 512], #the buy menu item
+		"about" = "A open field ready for seeds",
+		"labor_plant" = 5,
+		"labor_daily" = 2,
+		"water" = 1,
+		"grown" = [0, 0, 0], #seedling, mid growth, harvest
+		"frame" = [0, 0, 0], #the frames for each stage
+		"harvest" = [0,0] #min, max
+	},
+	"grain" = {
+		"name" = "Space Wheat",
+		"image" = [3, 1, 512, 512],
+		"about" = "A stalky plant that produces grain that can be refined into flour. Takes 6 days to grow.",
+		"labor_plant" = 15,
+		"labor_daily" = 5,
+		"water" = 5,
+		"grown" = [1, 3, 6],
+		"frame" = [4, 5, 6],
+		"harvest" = [3,5]
+	},
+	"fruit" = {
+		"name" = "Space BerriFruit",
+		"image" = [3, 2, 512, 512],
+		"about" = "A bushy plant that grows large berry fruit that can be eaten raw or refined into a jam. Takes 8 days to grow.",
+		"labor_plant" = 5,
+		"labor_daily" = 5,
+		"water" = 15,
+		"grown" = [1, 4, 8],
+		"frame" = [8, 9, 10],
+		"harvest" = [9,15]
+	}
 }
