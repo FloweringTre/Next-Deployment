@@ -1,0 +1,44 @@
+do Globals.interact_with("GLOBAL_DIALOG", "Dialogic", "start")
+[background arg="res://assets/bg_medbay.png" fade="0.0"]
+[style name="timeline_style"]
+join clone rightmost
+clone: Hey.... nice to see you awake vod! \
+You took a real nasty blow there. Took a while in the bacta tank to get you all better.
+clone: Let's check your faculities.
+label NUMBER SET
+[text_input text="What's your CT number? " var="temp_value" placeholder="1234"]
+if Globals.number_length() == 7.0:
+	do Globals.set_player_number("temp")
+	clone: Woah, a legacy number. Don't see many of those these days. Nice to see you're still around!
+elif Globals.number_length() == 4.0:
+	do Globals.set_player_number("temp")
+	clone: Good, the blast didn't shake out all your sense.
+else:
+	clone: Hey, that's not funny. Your number should be something like CT-1234, or if you're a legacy trooper, CT-12-3456. This isn't time for jokes vod.
+	[text_input text="What's your CT number? " var="temp_value" placeholder="12-3456"]
+	if Globals.number_length()  == 7 or Globals.number_length()  == 4:
+		do Globals.set_player_number("temp")
+		clone: There you go...
+	else:
+		do Globals.set_player_number("random")
+		clone: Alright... Clearly you're a bit shaken up. Your chart says your number is CT-{Globals.PlayerData["number"]}... lets move on.
+label NAME SET
+clone: That was an easy question. A little harder... do you rember your name?
+- Yes!
+	[text_input text="What's your name then vod?" var="temp_value"]
+	do Globals.set_player_name("temp")
+	clone: Nice to meet you {Globals.PlayerData["name"]}.
+- No...
+	do Globals.set_player_name("random")
+	clone: That's okay, you did survive an explosion. Some stuff probably needs more time to settle. Your chart says your name is {Globals.PlayerData["name"]}. It's nice to meet you.
+label GENDER SET
+clone: Lets finish up this quick mental test then with one last question. What are you to me?
+- Your brother
+	do Globals.set_player_prnoun(0)
+- Your sister
+	do Globals.set_player_prnoun(1)
+- Your vod
+	do Globals.set_player_prnoun(2)
+clone: Nice to see you are all here with us {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}.\
+{Globals.PlayerData["name"]} // {Globals.PlayerData["number"]}
+do Globals.interact_with("GLOBAL_DIALOG", "Dialogic", "end")
