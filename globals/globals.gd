@@ -146,8 +146,12 @@ func day_turnover() -> void:
 	for plot in BuySheet.BuildingInventory:
 		BuySheet.BuildingInventory[plot].set("worked_today", false)
 		if BuySheet.BuildingInventory[plot]["type"] == "farm":
+			BuySheet.DailyCosts["labor"] -= BuySheet.BuildingInventory[plot]["costs"][0]
+			BuySheet.DailyCosts["water"] -= BuySheet.BuildingInventory[plot]["costs"][1]
+			
 			if BuySheet.BuildingInventory[plot]["crop_planted"] == Checklist["farm"]["c_want"][0]:
 				temp_c_want_plant += 1
+			
 		
 		if BuySheet.BuildingInventory[plot]["queued"] != "":
 			match BuySheet.BuildingInventory[plot]["type"]:
@@ -171,7 +175,7 @@ func day_turnover() -> void:
 						if BuySheet.BuildingInventory[plot]["built"] == Checklist["house"]["c_want"][0]:
 							Checklist["house"]["c_want"][1] -= 1
 				
-				###FINISH WITH THE CROPS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				
 				"farm":
 					if BuySheet.BuildingInventory[plot]["queued"] != "rubble":
 						Checklist["farm"]["has"] += 1
