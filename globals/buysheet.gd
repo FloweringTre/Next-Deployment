@@ -11,6 +11,14 @@ var ResourceInventory : Dictionary = {
 	"food" = 100
 }
 
+var DailyCosts : Dictionary = {
+	"stone" = 25,
+	"wood" = 25,
+	"labor" = 100,
+	"water" = -20,
+	"food" = -20
+}
+
 var BuildingInventory : Dictionary = {
 	"shelter_1" = {
 		"name" = "Home Plot 1",
