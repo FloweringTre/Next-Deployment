@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://c71prkv7m8vl"]
+
+[ext_resource type="Script" uid="uid://d4mgf8xrl03w6" path="res://objects/ui/popup_box.gd" id="1_kpdq8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpdq8"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.024849813, 0.11401794, 0.14983633, 0.78431374)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="PopupBox" type="Control" unique_id=567834476]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kpdq8")
+
+[node name="Container" type="PanelContainer" parent="." unique_id=684780243]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -100.0
+offset_right = 175.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kpdq8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container" unique_id=814676752]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="spacer" type="Container" parent="Container/VBoxContainer" unique_id=1473190920]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="title" type="Label" parent="Container/VBoxContainer" unique_id=1809074368]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "I AM A TITLE"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="text" type="Label" parent="Container/VBoxContainer" unique_id=965761574]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(290, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "holy wow look at me. 
+I am so much text
+dont you know it
+I am text on the screen."
+autowrap_mode = 2
+
+[node name="spacer2" type="Container" parent="Container/VBoxContainer" unique_id=1447741547]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Container/VBoxContainer" unique_id=1504846879]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "close"
+
+[node name="spacer3" type="Container" parent="Container/VBoxContainer" unique_id=340577791]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[connection signal="pressed" from="Container/VBoxContainer/Button" to="." method="_on_button_pressed"]
