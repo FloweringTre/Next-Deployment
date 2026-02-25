@@ -75,7 +75,7 @@ func _on_global_interaction(reciever, sender, message):
 				$".".modulate = Color(1, 1, 1, 1)
 			$CanvasLayer.visible = !dialog_open
 			
-			if sender == "popup_box":
+			if sender == "datapad":
 				$CanvasLayer/HBoxContainer/DayButton.disabled = dialog_open
 				$CanvasLayer/HBoxContainer/DatapadButton.disabled = dialog_open
 				$CanvasLayer.visible = true
