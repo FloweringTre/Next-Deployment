@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://be00j8kley42i" path="res://objects/ui/building_menu.tscn" id="3_qtjoh"]
 [ext_resource type="PackedScene" uid="uid://b3fafbai22rpu" path="res://objects/farm.tscn" id="3_tidej"]
 [ext_resource type="PackedScene" uid="uid://c71prkv7m8vl" path="res://objects/ui/popup_box.tscn" id="5_uihwk"]
+[ext_resource type="PackedScene" uid="uid://cj6rwqplsbvq2" path="res://objects/ui/data_pad.tscn" id="5_xhgtm"]
 
 [node name="Community" type="Node2D" unique_id=1450293807]
 script = ExtResource("1_0pwr5")
@@ -211,17 +212,9 @@ theme_override_constants/separation = 30
 layout_mode = 2
 text = "new day"
 
-[node name="ListButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=261448097]
+[node name="DatapadButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=210451393]
 layout_mode = 2
-text = "gar checklist"
-
-[node name="CostsButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1610851245]
-layout_mode = 2
-text = "daily costs"
-
-[node name="WantsButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=923860155]
-layout_mode = 2
-text = "community wants"
+text = "Open Datapad"
 
 [node name="BuildingMenu" parent="CanvasLayer" unique_id=2115674862 instance=ExtResource("3_qtjoh")]
 visible = false
@@ -232,6 +225,16 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="DataPad" parent="CanvasLayer" unique_id=2064185455 instance=ExtResource("5_xhgtm")]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="PopupBox" parent="CanvasLayer" unique_id=567834476 instance=ExtResource("5_uihwk")]
 unique_name_in_owner = true
@@ -246,6 +249,4 @@ offset_bottom = 0.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/HBoxContainer/DayButton" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/ListButton" to="." method="_on_list_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/CostsButton" to="." method="_on_costs_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/HBoxContainer/WantsButton" to="." method="_on_wants_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/DatapadButton" to="." method="_on_datapad_button_pressed"]
