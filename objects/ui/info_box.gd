@@ -9,6 +9,7 @@ var wood = 0
 var stone = 0
 var labor = 0
 var water = 0
+var d_labor = 0
 var is_built
 
 func _ready() -> void:
@@ -97,7 +98,9 @@ func farm_set_up_text() -> void:
 		if water < 20:
 			water = 20
 		
-		%costs.text = "Cost:\n   Build Water: " + str(water) + "\n   Build Labor: " + str(labor) + "\n   Daily Labor: " + str(BuySheet.CropList["none"]["labor_daily"] * multiplier)+ "\n   Daily Water: " + str(BuySheet.CropList["none"]["water"] * multiplier)
+		d_labor = BuySheet.CropList["none"]["labor_daily"] * multiplier
+		
+		%costs.text = "Cost:\n   Build Water: " + str(water) + "\n   Build Labor: " + str(labor) + "\n   Daily Labor: " + str(d_labor)+ "\n   Daily Water: " + str(BuySheet.CropList["none"]["water"] * multiplier)
 	
 	elif type == 3: #crops
 		match BuySheet.BuildingInventory[plot_spot]["built"]:
@@ -105,8 +108,9 @@ func farm_set_up_text() -> void:
 			"large_field": multiplier = 3
 		labor = reference_dictionary[building]["labor_plant"] * multiplier
 		water = reference_dictionary[building]["water"] * multiplier
+		d_labor = BuySheet.CropList[building]["labor_daily"] * multiplier
 		
-		%costs.text = "Cost:\n   Daily Water: " + str(water) + "\n   Build Labor: " + str(labor) + "\n   Daily Labor: " + str(BuySheet.CropList[building]["labor_daily"] * multiplier)
+		%costs.text = "Cost:\n   Daily Water: " + str(water) + "\n   Build Labor: " + str(labor) + "\n   Daily Labor: " + str(d_labor)
 		%buy_button.text = "plant this"
 
 func building_set_up_text() -> void:
@@ -126,7 +130,15 @@ func building_set_up_text() -> void:
 	%costs.text = "Cost:\n      Wood: " + str(wood) + "\n      Stone: " + str(stone) + "\n      Labor: " + str(labor)
 
 func check_budget() -> void:
-	if Globals.budget_check(BuySheet.ResourceInventory["wood"], wood) && Globals.budget_check(BuySheet.ResourceInventory["stone"], stone) && Globals.budget_check(BuySheet.ResourceInventory["labor"], labor) && Globals.budget_check(BuySheet.ResourceInventory["water"], water):
+	var can_afford = false
+	if type < 2:
+		if Globals.budget_check(BuySheet.ResourceInventory["wood"], wood) && Globals.budget_check(BuySheet.ResourceInventory["stone"], stone) && Globals.budget_check(BuySheet.ResourceInventory["labor"], labor):
+			can_afford = true
+	else:
+		if Globals.budget_check(BuySheet.ResourceInventory["water"], water) && Globals.budget_check(BuySheet.ResourceInventory["labor"], labor):
+			can_afford = true
+	
+	if can_afford:
 		#print(building + " - can afford")
 		if !is_built:
 			%buy_button.disabled = false
@@ -190,12 +202,20 @@ func _on_buy_button_pressed() -> void:
 			Globals.building_purchase([building, wood, stone, labor])
 		if type > 1:
 			Globals.farming_costs([water, labor])
+			var d_water
+			match building:
+				"small_field": d_water = BuySheet.CropList["none"]["water"]
+				"medium_field": d_water = 2 * BuySheet.CropList["none"]["water"]
+				"large_field": d_water = 3 * BuySheet.CropList["none"]["water"]
+			
+			BuySheet.BuildingInventory[plot_spot].set("costs", [d_labor, d_water])
 		
 		BuySheet.BuildingInventory[plot_spot].set("queued", building)
 		%buy_button.tooltip_text = "You built this building."
 	
 	if type == 3:
 		Globals.farming_costs([water, labor])
+		BuySheet.BuildingInventory[plot_spot].set("costs", [d_labor, water])
 		BuySheet.BuildingInventory[plot_spot].set("crop_planted", building)
 		BuySheet.BuildingInventory[plot_spot].set("crop_level", 0)
 	
