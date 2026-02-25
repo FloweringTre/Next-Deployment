@@ -2,12 +2,24 @@
 
 [ext_resource type="Script" uid="uid://d4mgf8xrl03w6" path="res://objects/ui/popup_box.gd" id="1_kpdq8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1f23"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.45694953, 0.5449972, 0.7137385, 0.84705883)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kpdq8"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
-bg_color = Color(0.024849813, 0.11401794, 0.14983633, 0.78431374)
+bg_color = Color(0.03907088, 0.10253855, 0.18646139, 0.78431374)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -25,63 +37,83 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kpdq8")
 
-[node name="Container" type="PanelContainer" parent="." unique_id=684780243]
-custom_minimum_size = Vector2(350, 0)
+[node name="Panel" type="PanelContainer" parent="." unique_id=1157317476]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -100.0
-offset_right = 175.0
-offset_bottom = 100.0
+offset_left = -170.0
+offset_top = -105.0
+offset_right = 150.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n1f23")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1190166854]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Container" type="PanelContainer" parent="Panel/MarginContainer" unique_id=684780243]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kpdq8")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Container" unique_id=814676752]
-custom_minimum_size = Vector2(300, 0)
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/Container" unique_id=2077701287]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="spacer" type="Container" parent="Container/VBoxContainer" unique_id=1473190920]
-custom_minimum_size = Vector2(0, 10)
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/Container/MarginContainer" unique_id=814676752]
 layout_mode = 2
 
-[node name="title" type="Label" parent="Container/VBoxContainer" unique_id=1809074368]
+[node name="title" type="Label" parent="Panel/MarginContainer/Container/MarginContainer/VBoxContainer" unique_id=1809074368]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 20
 text = "I AM A TITLE"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="text" type="Label" parent="Container/VBoxContainer" unique_id=965761574]
+[node name="text" type="Label" parent="Panel/MarginContainer/Container/MarginContainer/VBoxContainer" unique_id=965761574]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(290, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-text = "holy wow look at me. 
-I am so much text
-dont you know it
-I am text on the screen."
+text = "holy wow look at me. "
 autowrap_mode = 2
 
-[node name="spacer2" type="Container" parent="Container/VBoxContainer" unique_id=1447741547]
-custom_minimum_size = Vector2(0, 5)
-layout_mode = 2
-
-[node name="Button" type="Button" parent="Container/VBoxContainer" unique_id=1504846879]
+[node name="moveButton" type="Button" parent="Panel/MarginContainer/Container/MarginContainer/VBoxContainer" unique_id=1504846879]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 text = "close"
 
-[node name="spacer3" type="Container" parent="Container/VBoxContainer" unique_id=340577791]
-custom_minimum_size = Vector2(0, 5)
+[node name="y_nBox" type="HBoxContainer" parent="Panel/MarginContainer/Container/MarginContainer/VBoxContainer" unique_id=177190058]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="noButton" type="Button" parent="Panel/MarginContainer/Container/MarginContainer/VBoxContainer/y_nBox" unique_id=1969633627]
+layout_mode = 2
+text = "No"
+
+[node name="spacer2" type="Container" parent="Panel/MarginContainer/Container/MarginContainer/VBoxContainer/y_nBox" unique_id=1221966197]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[connection signal="pressed" from="Container/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="yesButton" type="Button" parent="Panel/MarginContainer/Container/MarginContainer/VBoxContainer/y_nBox" unique_id=1607597646]
+layout_mode = 2
+text = "Yes"
+
+[connection signal="pressed" from="Panel/MarginContainer/Container/MarginContainer/VBoxContainer/moveButton" to="." method="_move_on_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/Container/MarginContainer/VBoxContainer/y_nBox/noButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/Container/MarginContainer/VBoxContainer/y_nBox/yesButton" to="." method="_on_yes_button_pressed"]
