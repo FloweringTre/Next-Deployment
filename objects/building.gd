@@ -29,6 +29,10 @@ func set_up() -> void:
 
 
 func _on_global_interaction(reciever, sender, message):
+	if sender == "Build_Menu" or reciever == "Build_Menu":
+		$Area2D/CollisionShape2D.disabled = !$Area2D/CollisionShape2D.disabled
+		#print(plot_spot, " - ", $Area2D/CollisionShape2D.disabled)
+	
 	match reciever:
 		plot_spot:
 			if sender == "Build_Menu" && message == "closed":
@@ -43,21 +47,23 @@ func _on_global_interaction(reciever, sender, message):
 					$Sprite2D.frame = reference_dictionary[BuySheet.BuildingInventory[plot_spot]["built"]]["image"][0]
 					$cone.visible = false
 					$Area2D/CollisionShape2D.disabled = false
-					
-					if BuySheet.BuildingInventory[plot_spot]["built"] == "well":
-						BuySheet.ResourceInventory["water"] += 50
-						Globals.interact_with("RESOURCE_UPDATE", plot_spot, "water_added_from_well")
 		
 		"GLOBAL_PURCHASE":
 			if plot_spot == message:
 				$cone.visible = true
 				$Area2D/CollisionShape2D.disabled = true
+		
+		"GLOBAL_DIALOG":
+			if message == "start":
+				$Area2D/CollisionShape2D.disabled = true
+			elif message == "end":
+				$Area2D/CollisionShape2D.disabled = false
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click") and mouse_on:
 		#print(is_open, " - ", plot_spot)
-		Globals.interact_with("Build_Menu", plot_spot, str(is_open))
+		Globals.interact_with("Build_Menu", plot_spot, $".".position)
 		is_open = !is_open
 		#print(is_open)
 
