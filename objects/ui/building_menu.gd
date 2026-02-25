@@ -14,17 +14,11 @@ func _ready() -> void:
 
 func _on_global_interaction(reciever, sender, message):
 	if reciever == "Build_Menu":
-		#print(message)
-		if message == "true":
-			clear_cards()
-		else:
-			if sender != plot_spot:
-				clear_cards()
-				Globals.interact_with(plot_spot, "Build_Menu", "closed")
-			set_up(sender)
+		set_up(sender)
 
 func set_up(plot) -> void:
 	plot_spot = plot
+	$MenuBox/ScrollContainer.scroll_horizontal = 0
 	type = BuySheet.BuildingInventory[plot_spot]["type"]
 	%Label.text = "Building Menu for " + BuySheet.BuildingInventory[plot_spot]["name"]
 	match type:
