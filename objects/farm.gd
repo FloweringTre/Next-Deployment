@@ -23,8 +23,13 @@ func set_up() -> void:
 	$readyParticle.scale_amount_max = $readyParticle.scale_amount_max*$".".scale.x
 	$readyParticle.scale_amount_min = $readyParticle.scale_amount_min*$".".scale.x
 	
+	match BuySheet.BuildingInventory[plot_spot]["built"]:
+		"medium_field":
+			crop.set("harvest", [crop["harvest"][0]*2, crop["harvest"][1]*2])
+		"large_field":
+			crop.set("harvest", [crop["harvest"][0]*3, crop["harvest"][1]*3])
+	
 	crop_growth()
-	costs()
 
 func _on_global_interaction(reciever, sender, message):
 	if sender == "Build_Menu" or reciever == "Build_Menu":
@@ -49,10 +54,9 @@ func _on_global_interaction(reciever, sender, message):
 					if BuySheet.BuildingInventory[plot_spot]["crop_planted"] != "none":
 						BuySheet.BuildingInventory[plot_spot].set("crop_level", BuySheet.BuildingInventory[plot_spot]["crop_level"] + 1)
 					crop_growth()
-					costs()
 					
-					Globals.farming_costs([crop["water"], crop["labor_daily"]])
-					Globals.interact_with("RESOURCE_UPDATE", plot_spot, "daily_costs_taken")
+					#Globals.farming_costs([crop["water"], crop["labor_daily"]])
+					#Globals.interact_with("RESOURCE_UPDATE", plot_spot, "daily_costs_taken")
 		
 		"GLOBAL_PURCHASE":
 			if plot_spot == message:
@@ -64,28 +68,6 @@ func _on_global_interaction(reciever, sender, message):
 				$Area2D/CollisionShape2D.disabled = true
 			elif message == "end":
 				$Area2D/CollisionShape2D.disabled = false
-
-
-func costs() -> void:
-	var min
-	var max
-	match BuySheet.BuildingInventory[plot_spot]["built"]:
-		"medium_field":
-			crop.set("labor_plant", crop["labor_plant"]*2)
-			crop.set("labor_daily", crop["labor_daily"]*2)
-			crop.set("labor_daily", crop["labor_daily"]*2)
-			crop.set("water", crop["water"]*2)
-			min = crop["harvest"][0]*2
-			max = crop["harvest"][1]*2
-			crop.set("harvest", [min, max])
-		"large_field":
-			crop.set("labor_plant", crop["labor_plant"]*3)
-			crop.set("labor_daily", crop["labor_daily"]*3)
-			crop.set("labor_daily", crop["labor_daily"]*3)
-			crop.set("water", crop["water"]*3)
-			min = crop["harvest"][0]*3
-			max = crop["harvest"][1]*3
-			crop.set("harvest", [min, max])
 
 
 func _input(event: InputEvent) -> void:
@@ -164,11 +146,8 @@ func harvest() -> void:
 	$harvestParticle.emitting = true
 	
 	can_harvest = false
-	%row_1.visible = false
-	%row_2.visible = false
-	%row_3.visible = false
-	BuySheet.BuildingInventory[plot_spot].set("crop_planted", "none")
-	BuySheet.BuildingInventory[plot_spot].set("crop_level", 0)
+	BuySheet.BuildingInventory[plot_spot].set("crop_level", crop["grown"][1])
+	crop_growth()
 	BuySheet.ResourceInventory.set("food", BuySheet.ResourceInventory["food"]+harvest_amount)
 	crop = BuySheet.CropList[BuySheet.BuildingInventory[plot_spot]["crop_planted"]].duplicate(true)
 	Globals.interact_with("RESOURCE_UPDATE", plot_spot, "food_harvested")
