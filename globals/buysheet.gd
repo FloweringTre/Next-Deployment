@@ -15,8 +15,8 @@ var DailyCosts : Dictionary = {
 	"stone" = 25,
 	"wood" = 25,
 	"labor" = 100,
-	"water" = -20,
-	"food" = -20
+	"water" = -10,
+	"food" = -10
 }
 
 var BuildingInventory : Dictionary = {
@@ -56,6 +56,7 @@ var BuildingInventory : Dictionary = {
 		"queued" = "",
 		"crop_planted" = "none", 
 		"crop_level" = 0,
+		"costs" = [0, 0] #0 - labor / 1 - water
 	},
 	"farm_2" = {
 		"name" = "Farm Field 2",
@@ -65,6 +66,7 @@ var BuildingInventory : Dictionary = {
 		"queued" = "",
 		"crop_planted" = "none", 
 		"crop_level" = 0,
+		"costs" = [0, 0]
 	},
 }
 
@@ -203,8 +205,8 @@ var CropList : Dictionary = {
 		"name" = "Open Field",
 		"image" = [1, 0, 512, 512], #the buy menu item
 		"about" = "A open field ready for seeds",
-		"labor_plant" = 5,
-		"labor_daily" = 2,
+		"labor_plant" = 2,
+		"labor_daily" = 1,
 		"water" = 1,
 		"grown" = [0, 0, 0], #seedling, mid growth, harvest
 		"frame" = [0, 0, 0], #the frames for each stage
