@@ -1,0 +1,170 @@
+[gd_scene format=3 uid="uid://cj6rwqplsbvq2"]
+
+[ext_resource type="Script" uid="uid://4up7cejns8tc" path="res://objects/ui/data_pad.gd" id="1_ei7op"]
+[ext_resource type="Texture2D" uid="uid://fp3y52ieldts" path="res://assets/test_player.png" id="1_xxon7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ei7op"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.03529412, 0.09411765, 0.21960784, 0.78431374)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsmmp"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.08235294, 0.22352941, 0.3137255, 0.7058824)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="DataPad" type="Control" unique_id=2064185455]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ei7op")
+
+[node name="Panel" type="Panel" parent="." unique_id=120397159]
+custom_minimum_size = Vector2(560, 660)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -226.0
+offset_top = -530.0
+offset_right = 234.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ei7op")
+
+[node name="Panel" type="Panel" parent="Panel" unique_id=1179251452]
+custom_minimum_size = Vector2(540, 640)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -270.0
+offset_right = 220.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hsmmp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Panel" unique_id=93160547]
+custom_minimum_size = Vector2(520, 620)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -260.0
+offset_right = 210.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player_info" type="HBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=1328540624]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Panel/VBoxContainer/player_info" unique_id=2126882798]
+custom_minimum_size = Vector2(310, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="name" type="Label" parent="Panel/Panel/VBoxContainer/player_info/VBoxContainer" unique_id=1239018418]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lt. player name - CT-12-1345"
+
+[node name="gar" type="Label" parent="Panel/Panel/VBoxContainer/player_info/VBoxContainer" unique_id=759537632]
+unique_name_in_owner = true
+layout_mode = 2
+text = "GAR rep: value"
+
+[node name="community" type="Label" parent="Panel/Panel/VBoxContainer/player_info/VBoxContainer" unique_id=1781902152]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Local rep: value"
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Panel/VBoxContainer/player_info" unique_id=2074141462]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture = ExtResource("1_xxon7")
+expand_mode = 5
+
+[node name="tab_list" type="HBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=368223342]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="ListButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=1038359177]
+layout_mode = 2
+text = "gar checklist"
+
+[node name="CostsButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=465770389]
+layout_mode = 2
+text = "daily costs"
+
+[node name="WantsButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=1729839385]
+layout_mode = 2
+text = "community wants"
+
+[node name="spacer" type="Container" parent="Panel/Panel/VBoxContainer" unique_id=1248617556]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="display" type="VBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=2048182896]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="title" type="Label" parent="Panel/Panel/VBoxContainer/display" unique_id=25107478]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "I AM A TITLE"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="text" type="Label" parent="Panel/Panel/VBoxContainer/display" unique_id=2130815803]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "holy wow look at me. 
+I am so much text
+dont you know it
+I am text on the screen."
+autowrap_mode = 2
+
+[node name="away" type="Button" parent="." unique_id=1774408641]
+layout_mode = 0
+offset_left = 187.0
+offset_top = -566.0
+offset_right = 266.0
+offset_bottom = -535.0
+size_flags_horizontal = 8
+text = "put away"
+
+[connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list/ListButton" to="." method="_on_list_button_pressed"]
+[connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list/CostsButton" to="." method="_on_costs_button_pressed"]
+[connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list/WantsButton" to="." method="_on_wants_button_pressed"]
+[connection signal="pressed" from="away" to="." method="_on_away_pressed"]
