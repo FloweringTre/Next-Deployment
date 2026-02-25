@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://4up7cejns8tc" path="res://objects/ui/data_pad.gd" id="1_ei7op"]
 [ext_resource type="Texture2D" uid="uid://fp3y52ieldts" path="res://assets/test_player.png" id="1_xxon7"]
+[ext_resource type="PackedScene" uid="uid://c71prkv7m8vl" path="res://objects/ui/popup_box.tscn" id="3_hsmmp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ei7op"]
 content_margin_left = 0.0
@@ -56,10 +57,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -270.0
-offset_right = 220.0
-offset_bottom = 270.0
+offset_left = -270.0
+offset_top = -320.0
+offset_right = 270.0
+offset_bottom = 320.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hsmmp")
@@ -102,11 +103,17 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Local rep: value"
 
+[node name="VSeparator" type="VSeparator" parent="Panel/Panel/VBoxContainer/player_info" unique_id=621454307]
+layout_mode = 2
+
 [node name="TextureRect" type="TextureRect" parent="Panel/Panel/VBoxContainer/player_info" unique_id=2074141462]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 texture = ExtResource("1_xxon7")
 expand_mode = 5
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Panel/VBoxContainer" unique_id=1452410038]
+layout_mode = 2
 
 [node name="tab_list" type="HBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=368223342]
 layout_mode = 2
@@ -115,22 +122,28 @@ alignment = 1
 
 [node name="ListButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=1038359177]
 layout_mode = 2
+toggle_mode = true
 text = "gar checklist"
 
 [node name="CostsButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=465770389]
 layout_mode = 2
+toggle_mode = true
 text = "daily costs"
 
 [node name="WantsButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=1729839385]
 layout_mode = 2
+toggle_mode = true
 text = "community wants"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/Panel/VBoxContainer" unique_id=1650934958]
+layout_mode = 2
 
 [node name="spacer" type="Container" parent="Panel/Panel/VBoxContainer" unique_id=1248617556]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="display" type="VBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=2048182896]
-custom_minimum_size = Vector2(500, 0)
+custom_minimum_size = Vector2(500, 325)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -155,16 +168,64 @@ dont you know it
 I am text on the screen."
 autowrap_mode = 2
 
-[node name="away" type="Button" parent="." unique_id=1774408641]
+[node name="spacer2" type="Container" parent="Panel/Panel/VBoxContainer" unique_id=1177048098]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/Panel/VBoxContainer" unique_id=1749431876]
+layout_mode = 2
+
+[node name="tab_list2" type="HBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=1229636826]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+alignment = 2
+
+[node name="deployButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list2" unique_id=1339122635]
+unique_name_in_owner = true
+layout_mode = 2
+text = "return to command"
+
+[node name="away" type="Button" parent="Panel" unique_id=1774408641]
 layout_mode = 0
-offset_left = 187.0
-offset_top = -566.0
-offset_right = 266.0
-offset_bottom = -535.0
+offset_left = 463.0
+offset_top = 14.0
+offset_right = 542.0
+offset_bottom = 45.0
 size_flags_horizontal = 8
 text = "put away"
 
-[connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list/ListButton" to="." method="_on_list_button_pressed"]
-[connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list/CostsButton" to="." method="_on_costs_button_pressed"]
-[connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list/WantsButton" to="." method="_on_wants_button_pressed"]
-[connection signal="pressed" from="away" to="." method="_on_away_pressed"]
+[node name="PopupPanel" type="Panel" parent="Panel" unique_id=562796185]
+visible = false
+custom_minimum_size = Vector2(540, 640)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -320.0
+offset_right = 270.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hsmmp")
+
+[node name="PopupBox" parent="Panel/PopupPanel" unique_id=567834476 instance=ExtResource("3_hsmmp")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+
+[connection signal="toggled" from="Panel/Panel/VBoxContainer/tab_list/ListButton" to="." method="_on_list_button_toggled"]
+[connection signal="toggled" from="Panel/Panel/VBoxContainer/tab_list/CostsButton" to="." method="_on_costs_button_toggled"]
+[connection signal="toggled" from="Panel/Panel/VBoxContainer/tab_list/WantsButton" to="." method="_on_wants_button_toggled"]
+[connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list2/deployButton" to="." method="_on_deploy_button_pressed"]
+[connection signal="pressed" from="Panel/away" to="." method="_on_away_pressed"]
+[connection signal="answer" from="Panel/PopupPanel/PopupBox" to="." method="_on_popup_box_answer"]
