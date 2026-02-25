@@ -4,85 +4,88 @@
 [ext_resource type="PackedScene" uid="uid://uowi3g6syltd" path="res://objects/building.tscn" id="1_cpjqo"]
 [ext_resource type="PackedScene" uid="uid://be00j8kley42i" path="res://objects/ui/building_menu.tscn" id="3_qtjoh"]
 [ext_resource type="PackedScene" uid="uid://b3fafbai22rpu" path="res://objects/farm.tscn" id="3_tidej"]
+[ext_resource type="PackedScene" uid="uid://c71prkv7m8vl" path="res://objects/ui/popup_box.tscn" id="5_uihwk"]
 
 [node name="Community" type="Node2D" unique_id=1450293807]
 script = ExtResource("1_0pwr5")
 
-[node name="building" parent="." unique_id=978927594 instance=ExtResource("1_cpjqo")]
+[node name="plots" type="Node2D" parent="." unique_id=1246014431]
+
+[node name="community" parent="plots" unique_id=978927594 instance=ExtResource("1_cpjqo")]
 position = Vector2(315, 549)
 scale = Vector2(0.5, 0.5)
 type = 1
 plot_spot = "community_1"
 h_frames = 5
 
-[node name="Label" type="Label" parent="building" unique_id=131897313]
+[node name="Label" type="Label" parent="plots/community" unique_id=131897313]
 offset_left = -92.0
 offset_top = 280.0
 offset_right = 5.0
 offset_bottom = 303.0
 text = "Community Plot 1"
 
-[node name="building3" parent="." unique_id=823156792 instance=ExtResource("1_cpjqo")]
+[node name="community2" parent="plots" unique_id=823156792 instance=ExtResource("1_cpjqo")]
 position = Vector2(1114, 367)
 scale = Vector2(0.5, 0.5)
 type = 1
 plot_spot = "community_2"
 h_frames = 5
 
-[node name="Label" type="Label" parent="building3" unique_id=1514107999]
+[node name="Label" type="Label" parent="plots/community2" unique_id=1514107999]
 offset_left = -92.0
 offset_top = 280.0
 offset_right = 5.0
 offset_bottom = 303.0
 text = "Community Plot 2"
 
-[node name="building2" parent="." unique_id=2069267527 instance=ExtResource("1_cpjqo")]
+[node name="house" parent="plots" unique_id=2069267527 instance=ExtResource("1_cpjqo")]
 position = Vector2(992, 545)
 scale = Vector2(0.5, 0.5)
 type = 0
 plot_spot = "shelter_2"
 h_frames = 4
 
-[node name="Label2" type="Label" parent="building2" unique_id=520538627]
+[node name="Label2" type="Label" parent="plots/house" unique_id=520538627]
 offset_left = -72.0
 offset_top = 288.0
 offset_right = 25.0
 offset_bottom = 311.0
 text = "House plot 2"
 
-[node name="building4" parent="." unique_id=1306243225 instance=ExtResource("1_cpjqo")]
+[node name="house2" parent="plots" unique_id=1306243225 instance=ExtResource("1_cpjqo")]
 position = Vector2(179, 336)
 scale = Vector2(0.5, 0.5)
 type = 0
 plot_spot = "shelter_1"
 h_frames = 4
 
-[node name="Label2" type="Label" parent="building4" unique_id=1658589765]
+[node name="Label2" type="Label" parent="plots/house2" unique_id=1658589765]
 offset_left = -72.0
 offset_top = 288.0
 offset_right = 25.0
 offset_bottom = 311.0
 text = "House plot 1"
 
-[node name="farm" parent="." unique_id=4172160 instance=ExtResource("3_tidej")]
+[node name="farm" parent="plots" unique_id=4172160 instance=ExtResource("3_tidej")]
 position = Vector2(668, 565)
 scale = Vector2(0.5, 0.5)
 field_level = "large_field"
 
-[node name="Label3" type="Label" parent="farm" unique_id=967455900]
+[node name="Label3" type="Label" parent="plots/farm" unique_id=967455900]
 offset_left = -66.0
 offset_top = 264.0
 offset_right = 31.0
 offset_bottom = 287.0
 text = "Farm field 1"
 
-[node name="farm2" parent="." unique_id=1804546780 instance=ExtResource("3_tidej")]
+[node name="farm2" parent="plots" unique_id=1804546780 instance=ExtResource("3_tidej")]
 position = Vector2(532, 276)
 scale = Vector2(0.5, 0.5)
 plot_spot = "farm_2"
 field_level = "large_field"
 
-[node name="Label3" type="Label" parent="farm2" unique_id=1279782577]
+[node name="Label3" type="Label" parent="plots/farm2" unique_id=1279782577]
 offset_left = -66.0
 offset_top = 264.0
 offset_right = 31.0
@@ -98,7 +101,22 @@ offset_right = 755.0
 offset_bottom = 116.0
 horizontal_alignment = 1
 
-[node name="resourceBox" type="Control" parent="." unique_id=705032318]
+[node name="Timer" type="Timer" parent="." unique_id=84645096]
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=180955678]
+unique_name_in_owner = true
+position = Vector2(640, 360)
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2121078549]
+
+[node name="resourceBox" type="Control" parent="CanvasLayer" unique_id=705032318]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 44.0
@@ -106,97 +124,128 @@ offset_top = 33.0
 offset_right = 84.0
 offset_bottom = 73.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="resourceBox" unique_id=1075678861]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/resourceBox" unique_id=1075678861]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="dayContainer" type="HBoxContainer" parent="resourceBox/VBoxContainer" unique_id=2037094975]
+[node name="dayContainer" type="HBoxContainer" parent="CanvasLayer/resourceBox/VBoxContainer" unique_id=2037094975]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="resourceBox/VBoxContainer/dayContainer" unique_id=1552329364]
+[node name="Label" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/dayContainer" unique_id=1552329364]
 layout_mode = 2
 text = "   DAY "
 
-[node name="day" type="Label" parent="resourceBox/VBoxContainer/dayContainer" unique_id=314715029]
+[node name="day" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/dayContainer" unique_id=314715029]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="resourceBox/VBoxContainer" unique_id=947057169]
+[node name="Label" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer" unique_id=947057169]
 layout_mode = 2
 text = "Resource Inventory"
 horizontal_alignment = 1
 
-[node name="woodContainer" type="HBoxContainer" parent="resourceBox/VBoxContainer" unique_id=646696767]
+[node name="woodContainer" type="HBoxContainer" parent="CanvasLayer/resourceBox/VBoxContainer" unique_id=646696767]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="resourceBox/VBoxContainer/woodContainer" unique_id=1803957441]
+[node name="Label" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/woodContainer" unique_id=1803957441]
 layout_mode = 2
 text = "   Wood: "
 
-[node name="wood" type="Label" parent="resourceBox/VBoxContainer/woodContainer" unique_id=911169076]
+[node name="wood" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/woodContainer" unique_id=911169076]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="stoneContainer" type="HBoxContainer" parent="resourceBox/VBoxContainer" unique_id=1794738820]
+[node name="stoneContainer" type="HBoxContainer" parent="CanvasLayer/resourceBox/VBoxContainer" unique_id=1794738820]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="resourceBox/VBoxContainer/stoneContainer" unique_id=752685816]
+[node name="Label" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/stoneContainer" unique_id=752685816]
 layout_mode = 2
 text = "   Stone: "
 
-[node name="stone" type="Label" parent="resourceBox/VBoxContainer/stoneContainer" unique_id=1218859755]
+[node name="stone" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/stoneContainer" unique_id=1218859755]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="laborContainer" type="HBoxContainer" parent="resourceBox/VBoxContainer" unique_id=914750037]
+[node name="laborContainer" type="HBoxContainer" parent="CanvasLayer/resourceBox/VBoxContainer" unique_id=914750037]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="resourceBox/VBoxContainer/laborContainer" unique_id=1391892855]
+[node name="Label" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/laborContainer" unique_id=1391892855]
 layout_mode = 2
 text = "   Labor: "
 
-[node name="labor" type="Label" parent="resourceBox/VBoxContainer/laborContainer" unique_id=13352834]
+[node name="labor" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/laborContainer" unique_id=13352834]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="waterContainer" type="HBoxContainer" parent="resourceBox/VBoxContainer" unique_id=1222280783]
+[node name="waterContainer" type="HBoxContainer" parent="CanvasLayer/resourceBox/VBoxContainer" unique_id=1222280783]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="resourceBox/VBoxContainer/waterContainer" unique_id=1710746344]
+[node name="Label" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/waterContainer" unique_id=1710746344]
 layout_mode = 2
 text = "   Water: "
 
-[node name="water" type="Label" parent="resourceBox/VBoxContainer/waterContainer" unique_id=41735336]
+[node name="water" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/waterContainer" unique_id=41735336]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="foodContainer" type="HBoxContainer" parent="resourceBox/VBoxContainer" unique_id=764126719]
+[node name="foodContainer" type="HBoxContainer" parent="CanvasLayer/resourceBox/VBoxContainer" unique_id=764126719]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="resourceBox/VBoxContainer/foodContainer" unique_id=154262362]
+[node name="Label" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/foodContainer" unique_id=154262362]
 layout_mode = 2
 text = "   Food: "
 
-[node name="food" type="Label" parent="resourceBox/VBoxContainer/foodContainer" unique_id=741699103]
+[node name="food" type="Label" parent="CanvasLayer/resourceBox/VBoxContainer/foodContainer" unique_id=741699103]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Timer" type="Timer" parent="." unique_id=84645096]
-one_shot = true
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=345435439]
+offset_left = 744.0
+offset_top = 19.0
+offset_right = 1248.0
+offset_bottom = 50.0
+theme_override_constants/separation = 30
 
-[node name="Button" type="Button" parent="." unique_id=1497276818]
-offset_left = 911.0
-offset_top = 23.0
-offset_right = 919.0
-offset_bottom = 31.0
+[node name="DayButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1497276818]
+layout_mode = 2
 text = "new day"
 
-[node name="BuildingMenu" parent="." unique_id=2115674862 instance=ExtResource("3_qtjoh")]
-offset_left = 480.0
-offset_top = 65.0
-offset_right = 480.0
-offset_bottom = 65.0
+[node name="ListButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=261448097]
+layout_mode = 2
+text = "gar checklist"
+
+[node name="CostsButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=1610851245]
+layout_mode = 2
+text = "daily costs"
+
+[node name="WantsButton" type="Button" parent="CanvasLayer/HBoxContainer" unique_id=923860155]
+layout_mode = 2
+text = "community wants"
+
+[node name="BuildingMenu" parent="CanvasLayer" unique_id=2115674862 instance=ExtResource("3_qtjoh")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="PopupBox" parent="CanvasLayer" unique_id=567834476 instance=ExtResource("5_uihwk")]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 0.0
+offset_bottom = 0.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/DayButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/ListButton" to="." method="_on_list_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/CostsButton" to="." method="_on_costs_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/WantsButton" to="." method="_on_wants_button_pressed"]
