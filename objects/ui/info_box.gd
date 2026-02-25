@@ -15,6 +15,8 @@ func _ready() -> void:
 	set_up_card(type, plot_spot, building)
 
 func set_up_card(dict_type, build_plot, item_building) -> void:
+	$VBoxContainer/ScrollContainer.scroll_vertical = 0
+	$VBoxContainer/ScrollContainer2.scroll_vertical = 0
 	type = dict_type
 	plot_spot = build_plot
 	building = item_building
