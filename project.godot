@@ -30,6 +30,10 @@ directories/dch_directory={
 "player": "res://dialog/characters/player.dch"
 }
 directories/dtl_directory={
+"end_both_loss": "res://dialog/timelines/end_both_loss.dtl",
+"end_both_win": "res://dialog/timelines/end_both_win.dtl",
+"end_com_win": "res://dialog/timelines/end_com_win.dtl",
+"end_gar_win": "res://dialog/timelines/end_gar_win.dtl",
 "test_start": "res://dialog/timelines/test_start.dtl"
 }
 layout/style_directory={
