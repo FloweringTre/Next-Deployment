@@ -1,5 +1,7 @@
 extends Node
 
+var game_running : bool = false
+
 var PlayerData : Dictionary = {
 	"name" = "Juniper",
 	"number" = "9631",
@@ -120,6 +122,12 @@ func _on_global_interaction(reciever, sender, message):
 	match reciever:
 		"global_new_day":
 			day_turnover()
+		
+		"GLOBAL_DIALOG":
+			if message == "end" && !game_running:
+				TransitionFade.transition()
+				await TransitionFade.transition_finished
+				get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func budget_check(value_to_check, price):
 	if (value_to_check - price) < 0:
@@ -241,6 +249,7 @@ func day_turnover() -> void:
 
 
 func game_ending_calculation() -> void:
+	game_running = false
 	var gar = PlayerData["g_rep"]/10
 	var com = PlayerData["c_rep"]/10
 	
