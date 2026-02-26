@@ -115,25 +115,29 @@ expand_mode = 5
 [node name="HSeparator" type="HSeparator" parent="Panel/Panel/VBoxContainer" unique_id=1452410038]
 layout_mode = 2
 
-[node name="tab_list" type="HBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=368223342]
+[node name="tabs" type="VBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=208527637]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 30
-alignment = 1
 
-[node name="ListButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=1038359177]
+[node name="row0" type="TabBar" parent="Panel/Panel/VBoxContainer/tabs" unique_id=1449484177]
+unique_name_in_owner = true
 layout_mode = 2
-toggle_mode = true
-text = "gar checklist"
+deselect_enabled = true
+tab_count = 4
+tab_0/title = "tab1"
+tab_1/title = "tab2"
+tab_2/title = "tab3"
+tab_3/title = "tab4"
 
-[node name="CostsButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=465770389]
+[node name="row1" type="TabBar" parent="Panel/Panel/VBoxContainer/tabs" unique_id=1398705260]
+unique_name_in_owner = true
 layout_mode = 2
-toggle_mode = true
-text = "daily costs"
-
-[node name="WantsButton" type="Button" parent="Panel/Panel/VBoxContainer/tab_list" unique_id=1729839385]
-layout_mode = 2
-toggle_mode = true
-text = "community wants"
+deselect_enabled = true
+tab_count = 4
+tab_0/title = "Home"
+tab_1/title = "Mission Obectives"
+tab_2/title = "Daily Costs"
+tab_3/title = "Community Desires"
 
 [node name="HSeparator2" type="HSeparator" parent="Panel/Panel/VBoxContainer" unique_id=1650934958]
 layout_mode = 2
@@ -143,7 +147,7 @@ custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="display" type="VBoxContainer" parent="Panel/Panel/VBoxContainer" unique_id=2048182896]
-custom_minimum_size = Vector2(500, 325)
+custom_minimum_size = Vector2(500, 295)
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -223,9 +227,8 @@ anchor_bottom = 0.5
 offset_right = 0.0
 offset_bottom = 0.0
 
-[connection signal="toggled" from="Panel/Panel/VBoxContainer/tab_list/ListButton" to="." method="_on_list_button_toggled"]
-[connection signal="toggled" from="Panel/Panel/VBoxContainer/tab_list/CostsButton" to="." method="_on_costs_button_toggled"]
-[connection signal="toggled" from="Panel/Panel/VBoxContainer/tab_list/WantsButton" to="." method="_on_wants_button_toggled"]
+[connection signal="tab_clicked" from="Panel/Panel/VBoxContainer/tabs/row0" to="." method="_on_tab_bar_2_tab_clicked"]
+[connection signal="tab_clicked" from="Panel/Panel/VBoxContainer/tabs/row1" to="." method="_on_tab_bar_tab_clicked"]
 [connection signal="pressed" from="Panel/Panel/VBoxContainer/tab_list2/deployButton" to="." method="_on_deploy_button_pressed"]
 [connection signal="pressed" from="Panel/away" to="." method="_on_away_pressed"]
 [connection signal="answer" from="Panel/PopupPanel/PopupBox" to="." method="_on_popup_box_answer"]
