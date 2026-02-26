@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Next-Deployment"
+run/main_scene="uid://0amlqx7j12go"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://bh7k1tdjkh1u1"
 config/icon="res://icon.svg"
@@ -20,6 +21,7 @@ config/icon="res://icon.svg"
 Globals="*uid://cusm8xcnuki1a"
 BuySheet="*uid://crlb6dpasaq8w"
 Dialogic="*uid://ds2q0uclmolvu"
+TransitionFade="*uid://cbonh3avqw1k4"
 
 [dialogic]
 
