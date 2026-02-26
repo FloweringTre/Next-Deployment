@@ -2,12 +2,24 @@ extends Control
 
 func _ready() -> void:
 	$".".visible = false
+	Globals.object_interaction.connect(_on_global_interaction)
+
+func _on_global_interaction(reciever, sender, message):
+	match reciever:
+		"GLOBAL_DIALOG":
+			if sender == "datapad":
+				pass
+			elif message == "start":
+				$".".visible = false
+			elif message == "end":
+				$".".visible = false
+
 
 func set_up() -> void:
 	$".".visible = true
 	%name.text = "Lt. " + Globals.PlayerData["name"] + " - CT-" + Globals.PlayerData["number"]
-	%gar.text = "GAR Repuation: " + str(Globals.PlayerData["g_rep"])
-	%community.text = "Local Repuation: " + str(Globals.PlayerData["c_rep"])
+	%gar.text = "GAR Repuation: " + str(Globals.PlayerData["g_rep"]) + "/" + str(Globals.Checklist.size()*10)
+	%community.text = "Local Repuation: " + str(Globals.PlayerData["c_rep"]) + "/" + str(Globals.Checklist.size()*10)
 	display("", "")
 	Globals.interact_with("GLOBAL_DIALOG", "datapad", "start")
 
@@ -87,8 +99,9 @@ func _on_popup_box_answer(answer : String) -> void:
 			pass
 		"yes":
 			await Engine.get_main_loop().process_frame
-			$Panel/PopupPanel.visible = true
-			$Panel/PopupPanel/PopupBox.open_popup(false, "Deployment ended.", "Congrats. You have completed your mission.")
+			Globals.game_ending_calculation()
+			#$Panel/PopupPanel.visible = true
+			#$Panel/PopupPanel/PopupBox.open_popup(false, "Deployment ended.", "Congrats. You have completed your mission.")
 
 
 func _on_deploy_button_pressed() -> void:
