@@ -1,0 +1,30 @@
+do Globals.interact_with("GLOBAL_DIALOG", "Dialogic", "start")
+[style name="timeline_style"]
+join gar right
+join player left
+***GAR ONLY WIN DIALOGUE***
+gar: Welcome back Lieutenant {Globals.PlayerData["name"]}. How was your mission?
+- Respond contently
+	player: It was good. I learned a lot and hope to carry the lessons with me.
+	gar: Good to hear it, {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. Glad this deployment treated you well.
+- Respond sadly
+	player: It was not what I expected my next deployment would be. I hope it won't be like that again.
+	gar: Sorry to hear it, {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. Not every deployment we get is ideal. You know how it is.
+- Respond angerly
+	player: I should have never been assigned that deployment. I better not get another one of those.
+	gar: Easy, {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. You better watch your mouth or you will end yourself right back there.
+gar: Your deployment was a success! All tasks completed to satisfactory marks!
+gar: I will be honest, I didn't think you would recover after that explosion. Nice to see you are all together and ready for real work.
+gar: Chin up,  {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. You're going for greatness next.
+leave gar
+[chrip chrip]... [chrip chip]
+player: ?
+player: A report about the community?
+join clone rightmost
+clone: Latest intel from the community has heard they are already back in contact with the Seppies.
+clone: Our informant mentions notes that they did not feel heard by the platoon sent to help them.
+clone: Sad to hear our efforts were in vain, especially since a lot of vode were lost clearing this zone. Full report will be incoming in the next three rotations.
+leave clone
+update player center
+You won... GAR mission objectives were complete, you did your duty.... is that all that really mattered?
+do Globals.interact_with("GLOBAL_DIALOG", "Dialogic", "end")

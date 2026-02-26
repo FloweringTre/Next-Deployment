@@ -1,0 +1,31 @@
+do Globals.interact_with("GLOBAL_DIALOG", "Dialogic", "start")
+[style name="timeline_style"]
+join gar right
+join player left
+***COMMUNITY ONLY WIN DIALOGUE***
+gar: Welcome back Lieutenant {Globals.PlayerData["name"]}. How was your mission?
+- Respond contently
+	player: It was good. I learned a lot and hope to carry the lessons with me.
+	gar: Good to hear it, {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. Glad this deployment treated you well.
+- Respond sadly
+	player: It was not what I expected my next deployment would be. I hope it won't be like that again.
+	gar: Sorry to hear it, {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. Not every deployment we get is ideal. You know how it is.
+- Respond angerly
+	player: I should have never been assigned that deployment. I better not get another one of those.
+	gar: Easy, {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. You better watch your mouth or you will end yourself right back there.
+gar: I don't know what you thought you were doing out there, but that was abismal.
+gar: Clearly that explosion shook the last little bit of sense you still had. You *and* vode.
+gar: Watch yourself,  {Globals.Pronoun_Sibling[1][Globals.PlayerData["gender"]]}. If I was you, I would start looking up the cooking standards for the Kamino kitchens.
+leave gar
+[chrip chrip]... [chrip chip]
+player: ?
+player: A message from the community?
+join civie rightmost
+civie: It was sad to see you go. We were just getting to know one another.
+civie: Thank you for all your and your brothers' help. We appreciate it.
+civie: Thanks for listening, for *truly* helping. For going above and beyond your duty. I know it was hard. We understand and appreciate your efforts.
+civie: if you ever need aid in this region, we are happy to provide it.
+leave civie
+update player center
+Well... the community is better off thanks to you and your vode. Sure, the GAR is not pleased, but is that all we should focus on?
+do Globals.interact_with("GLOBAL_DIALOG", "Dialogic", "end")
