@@ -1,11 +1,11 @@
 extends Node
 
 var PlayerData : Dictionary = {
-	"name" = "",
-	"number" = "",
+	"name" = "Juniper",
+	"number" = "9631",
 	"gender" = 0, #0-He / 1-Her / 2-They
-	"g_rep" = 100,
-	"c_rep" = 50,
+	"g_rep" = 0,
+	"c_rep" = 0,
 }
 
 var Checklist : Dictionary = {
@@ -19,7 +19,7 @@ var Checklist : Dictionary = {
 		"com" = false,
 	}, 
 	"farm" = {
-		"name" = "Food Stores",
+		"name" = "Food Source",
 		"tip" = "Build something to increase get the food stores up.",
 		"has" = 0,
 		"need" = 2,
@@ -46,7 +46,7 @@ var Checklist : Dictionary = {
 		"com" = false,
 	}, 
 	"days" = {
-		"name" = "Days on Deployment",
+		"name" = "Max Days on Deployment",
 		"tip" = "The GAR High Command needs you back sooner than later.",
 		"has" = 0,
 		"need" = 10,
@@ -56,7 +56,7 @@ var Checklist : Dictionary = {
 	}, 
 }
 
-var random_names = ["Vod", "Star", "Kit", "Healy", "Fast", "Kote", "Jumper", "Variant", "Sircumferance", "Jaig", "Effo", "Dar"]
+var random_names = ["Vod", "Star", "Kit", "Healy", "Fast", "Kote", "Jumper", "Variant", "Sircumferance", "Jaig", "Effo", "Dar", "Juniper"]
 
 var Pronoun_Sibling = [["Brother", "Sister", "Vod"], ["brother", "sister", "vod"]]
 var Pronoun_Cap = [["He", "Him", "His"], ["She", "Her", "Hers"], ["They", "Them", "Theirs"]]
@@ -129,6 +129,19 @@ func budget_check(value_to_check, price):
 		#print("budget check true")
 		return true
 
+func building_purchase(building_array):
+	if building_array[0] == "rubble":
+		building_array[1] = building_array[1] * -1
+		building_array[2] = building_array[2] * -1
+	
+	BuySheet.ResourceInventory["wood"] -= building_array[1]
+	BuySheet.ResourceInventory["stone"] -= building_array[2]
+	BuySheet.ResourceInventory["labor"] -= building_array[3]
+
+func farming_costs(farm_array):
+	BuySheet.ResourceInventory["water"] -= farm_array[0]
+	BuySheet.ResourceInventory["labor"] -= farm_array[1]
+
 
 func day_turnover() -> void:
 	#Up the values
@@ -200,17 +213,42 @@ func day_turnover() -> void:
 	#update the farming want value since it tracks plants not the farm itself
 	Checklist["farm"].set("c_want", [Checklist["farm"]["c_want"][0], temp_c_want_plant, Checklist["farm"]["c_want"][2]])
 	
+	PlayerData["c_rep"] = 0
+	PlayerData["g_rep"] = 0
+	for item in Checklist:
+		if Checklist[item]["has"] >= Checklist[item]["need"]:
+			Checklist[item]["gar"] = true
+		else:
+			Checklist[item]["gar"] = false
+		
+		if Checklist[item]["c_want"][1] >= Checklist[item]["c_want"][2]:
+			Checklist[item]["com"] = true
+		else:
+			Checklist[item]["com"] = false
+		
+		if item == "days":
+			Checklist[item]["gar"] = !Checklist[item]["gar"]
+			Checklist[item]["com"] = !Checklist[item]["com"]
+		
+		if Checklist[item]["gar"]:
+			PlayerData["g_rep"] += 10
+		if Checklist[item]["com"]:
+			PlayerData["c_rep"] += 10
+		#print(item, "\n  GAR: ", Checklist[item]["gar"], "\n  Community: ", Checklist[item]["com"], "\n")
+	
 	interact_with("GLOBAL_ALERT", "global", "new_day")
 
-func building_purchase(building_array):
-	if building_array[0] == "rubble":
-		building_array[1] = building_array[1] * -1
-		building_array[2] = building_array[2] * -1
-	
-	BuySheet.ResourceInventory["wood"] -= building_array[1]
-	BuySheet.ResourceInventory["stone"] -= building_array[2]
-	BuySheet.ResourceInventory["labor"] -= building_array[3]
 
-func farming_costs(farm_array):
-	BuySheet.ResourceInventory["water"] -= farm_array[0]
-	BuySheet.ResourceInventory["labor"] -= farm_array[1]
+
+func game_ending_calculation() -> void:
+	var gar = PlayerData["g_rep"]/10
+	var com = PlayerData["c_rep"]/10
+	
+	if gar >=4 and com >= 4:
+		Dialogic.start("end_both_win")
+	elif gar >= 4 and com < 4:
+		Dialogic.start("end_gar_win")
+	elif com >= 4 and gar < 4:
+		Dialogic.start("end_com_win")
+	else:
+		Dialogic.start("end_both_loss")
