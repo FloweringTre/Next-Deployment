@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://uowi3g6syltd" path="res://objects/building.tscn" id="1_cpjqo"]
 [ext_resource type="PackedScene" uid="uid://be00j8kley42i" path="res://objects/ui/building_menu.tscn" id="3_qtjoh"]
 [ext_resource type="PackedScene" uid="uid://b3fafbai22rpu" path="res://objects/farm.tscn" id="3_tidej"]
+[ext_resource type="PackedScene" uid="uid://21ivg5puybow" path="res://objects/civilian.tscn" id="4_370ub"]
 [ext_resource type="PackedScene" uid="uid://c71prkv7m8vl" path="res://objects/ui/popup_box.tscn" id="5_uihwk"]
 [ext_resource type="PackedScene" uid="uid://cj6rwqplsbvq2" path="res://objects/ui/data_pad.tscn" id="5_xhgtm"]
 
@@ -92,6 +93,23 @@ offset_top = 264.0
 offset_right = 31.0
 offset_bottom = 287.0
 text = "Farm field 2"
+
+[node name="population" type="Node2D" parent="." unique_id=995065772]
+
+[node name="Civilian" parent="population" unique_id=846116048 instance=ExtResource("4_370ub")]
+position = Vector2(830, 421)
+
+[node name="Civilian2" parent="population" unique_id=1092666793 instance=ExtResource("4_370ub")]
+position = Vector2(943, 489)
+
+[node name="Civilian3" parent="population" unique_id=836007513 instance=ExtResource("4_370ub")]
+position = Vector2(705, 242)
+
+[node name="Civilian4" parent="population" unique_id=250841323 instance=ExtResource("4_370ub")]
+position = Vector2(452, 494)
+
+[node name="Civilian5" parent="population" unique_id=564398256 instance=ExtResource("4_370ub")]
+position = Vector2(277, 250)
 
 [node name="alert_label" type="Label" parent="." unique_id=534927065]
 unique_name_in_owner = true
@@ -228,6 +246,7 @@ offset_bottom = 0.0
 
 [node name="DataPad" parent="CanvasLayer" unique_id=2064185455 instance=ExtResource("5_xhgtm")]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

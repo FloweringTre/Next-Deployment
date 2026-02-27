@@ -5,6 +5,7 @@ var old_location : Vector2
 var new_location : Vector2
 var menu_open : bool = false
 var dialog_open : bool = false
+var carrying: bool = false
 
 func _ready() -> void:
 	Globals.object_interaction.connect(_on_global_interaction)
@@ -14,7 +15,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action("test_key"):
 		Dialogic.start("test_start")
 	
-	elif event is InputEventMouseButton and !menu_open and !dialog_open:
+	elif event is InputEventMouseButton and !menu_open and !dialog_open and !carrying:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			%Camera2D.position = get_global_mouse_position()
 			%Camera2D.zoom += Vector2(0.05, 0.05)
@@ -60,6 +61,8 @@ func _on_global_interaction(reciever, sender, message):
 		
 		"GLOBAL_ALERT":
 			match message:
+				"carrying":
+					carrying = !carrying
 				"Not Enough Resources":
 					%alert_label.text = "Not enough resources to build"
 					$Timer.start(3)
