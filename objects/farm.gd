@@ -7,6 +7,7 @@ var crop : Dictionary
 
 var can_harvest : bool = false
 var is_open : bool = false
+var carrying : bool = false
 
 func _ready() -> void:	
 	Globals.object_interaction.connect(_on_global_interaction)
@@ -43,6 +44,8 @@ func _on_global_interaction(reciever, sender, message):
 		
 		"GLOBAL_ALERT":
 			match message:
+				"carrying":
+					carrying = !carrying
 				"Not Enough Resources":
 					$Area2D/CollisionShape2D.disabled = true
 				"new_day":
@@ -71,7 +74,7 @@ func _on_global_interaction(reciever, sender, message):
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("left_click") and mouse_on:
+	if event.is_action_pressed("left_click") and mouse_on and !carrying:
 		#print(is_open, " - ", plot_spot
 		if can_harvest:
 			harvest()
