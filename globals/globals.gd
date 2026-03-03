@@ -60,6 +60,10 @@ var Checklist : Dictionary = {
 
 var random_names = ["Vod", "Star", "Kit", "Healy", "Fast", "Kote", "Jumper", "Variant", "Sircumferance", "Jaig", "Effo", "Dar", "Juniper"]
 
+var human_tones = [Color("8d5524"), Color("8d5524"), Color("c68642"), Color("e0ac69"), Color("9f593f"), Color("714c43"), Color("4b3331"), Color("e0ac69")]
+var twi_tones = [Color("5e7826"), Color("b1b900"), Color("378290ff"), Color("6d57baff"), Color("b13c7fff"), Color("ad662eff"), Color("96432dff"), Color("4f5eb4ff")]
+var hair_tones = [Color("211203ff"), Color("b59573ff"), Color("752b16ff"), Color("6d6b67ff"), Color("2671bfff"), Color("ded716ff"), Color("94591eff"), Color("5d0c19ff")]
+
 var Pronoun_Sibling = [["Brother", "Sister", "Vod"], ["brother", "sister", "vod"]]
 var Pronoun_Cap = [["He", "Him", "His"], ["She", "Her", "Hers"], ["They", "Them", "Theirs"]]
 var Pronoun_Low = [["he", "him", "his"], ["she", "her", "hers"], ["they", "them", "theirs"]]
