@@ -108,8 +108,21 @@ position = Vector2(705, 242)
 [node name="Civilian4" parent="population" unique_id=250841323 instance=ExtResource("4_370ub")]
 position = Vector2(452, 494)
 
-[node name="Civilian5" parent="population" unique_id=564398256 instance=ExtResource("4_370ub")]
+[node name="Trooper" parent="population" unique_id=564398256 instance=ExtResource("4_370ub")]
 position = Vector2(277, 250)
+is_trooper = true
+
+[node name="Trooper2" parent="population" unique_id=1954721855 instance=ExtResource("4_370ub")]
+position = Vector2(218, 253)
+is_trooper = true
+
+[node name="Trooper3" parent="population" unique_id=2110490954 instance=ExtResource("4_370ub")]
+position = Vector2(965.99994, 212)
+is_trooper = true
+
+[node name="Trooper4" parent="population" unique_id=405751674 instance=ExtResource("4_370ub")]
+position = Vector2(1148.9999, 288)
+is_trooper = true
 
 [node name="alert_label" type="Label" parent="." unique_id=534927065]
 unique_name_in_owner = true
